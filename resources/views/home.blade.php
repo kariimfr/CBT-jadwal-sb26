@@ -1,8 +1,27 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@push('styles')
+    <style>
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+        }
+
+        #wrapper-slider .card-body>img {
+            width: 75%;
+            height: 280px;
+            object-fit: cover;
+        }
+    </style>
+@endpush
 
 @section('content')
+    @if (@session('succes'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    @if (@session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
 
     <div class="min-h-screen bg-[#f5f7f4]">
 
@@ -24,12 +43,12 @@
                     {{-- Navigation --}}
                     <div class="flex items-center gap-3">
 
-                        <a href="auth.login"
+                        <a href="{{ route('login') }}"
                             class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-[#063b2b] transition">
                             Masuk
                         </a>
 
-                        <a href="#"
+                        <a href="{{ route('register') }}"
                             class="px-5 py-2.5 bg-[#2E7D4F] text-white text-sm font-semibold rounded-lg hover:bg-[#24663f] transition">
                             Daftar
                         </a>
@@ -289,5 +308,4 @@
 
         </section>
     </div>
-
 @endsection

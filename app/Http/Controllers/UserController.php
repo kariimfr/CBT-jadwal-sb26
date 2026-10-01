@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function register(Request $request)
     {
-        $validated = $request->validate([
+        $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -29,9 +29,9 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
             'role' => 'user',
         ]);
 
@@ -54,7 +54,7 @@ class UserController extends Controller
             // setelah lpgin berhasil, mau di kemasin
             return redirect()->route('home')->with('success', 'Login Berhasil');
         } else {
-            return redirect()->route('login.process')->with('error',  'Email dan Password
+            return redirect()->route('login.store')->with('error',  'Email dan Password
             tidak sesuai silahkan coba lagi.');
         }
     }

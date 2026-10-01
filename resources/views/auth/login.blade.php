@@ -1,6 +1,13 @@
 @extends('layouts.app')
-
 @section('content')
+    @if (session('success'))
+        <div class="mb-5 rounded-lg bg-green-100 border border-green-300 px-4 py-3 text-green-700">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (@session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
     <div class="min-h-screen grid grid-cols-1 lg:grid-cols-2">
 
         {{-- LEFT : BRANDING --}}

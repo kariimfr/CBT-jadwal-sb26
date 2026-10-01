@@ -1,22 +1,22 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+// Home
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
-
-// Halaman login
+// Login
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-// Proses login sementara
-Route::post('/login', function () {
-    return 'Login berhasil diproses';
-})->name('login.process');
-
+// Register
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
+
+Route::post('/register', [UserController::class, 'register'])
+    ->name('register.store');
